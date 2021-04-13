@@ -1,0 +1,186 @@
+@import "antd/dist/antd.css";
+
+#root {
+  height: 100%;
+}
+/* Login Form Styling */
+
+.auth_form_container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.auth_form_wrapper {
+  background-color: rgb(246, 250, 255);
+  padding: 5%;
+  box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.1), 0 5px 5px 0 rgba(0, 0, 0, 0.1);
+  width: 400px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+
+.auth_form {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.auth_input {
+  width: 280px;
+  margin: 5px 0px;
+}
+
+.auth_btn {
+  width: 100px;
+  margin-top: 5px;
+}
+
+.auth_radio_btn {
+  margin-bottom: 10px;
+}
+
+.text-danger {
+  color: red;
+}
+
+.auth_radio_wrapper {
+  display: flex;
+  justify-content: flex-start;
+  width: 100%;
+}
+
+/* Loader */
+
+.full-page-loader {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+  z-index: 1;
+  opacity: 0.9;
+}
+
+/* Ant overriding */
+
+.ant-divider-horizontal {
+  margin: 15px 0px;
+}
+
+/* Card */
+
+.dog_card_footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.fvt_icon:hover {
+  color: red;
+  cursor: pointer;
+}
+
+/* dashboard */
+
+.dashboard_layout {
+  height: 100%;
+  padding: 10px 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.dashboard_btn {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+/* Add a dog - Modal */
+
+.addDog_modal {
+  display: flex;
+  flex-direction: column;
+}
+
+.addDog_input {
+  margin: 5px 0px;
+}
+
+.addDog_select {
+  margin: 5px 0px;
+  width: 100%;
+}
+
+.addDog_footer {
+  display: flex;
+  justify-content: space-between;
+}
+
+.addDog_btn {
+  margin-top: 10px;
+  width: 150px;
+}
+
+/* Home Pagination */
+
+.home_pagination {
+  display: flex;
+  justify-content: flex-end;
+  margin: 10px 0px;
+}
+
+/* Breed Filter */
+.breadcrumb_wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.breed_filter {
+  margin-top: 16px;
+  width: 200px;
+}
+
+/* Dog Details */
+
+.dogDetail_img {
+  width: 500px;
+  height: 300px;
+  margin-top: 30px;
+  border-radius: 10px;
+}
+
+.dogDetail_h1 {
+  font-size: 80px;
+  font-weight: 100;
+  margin: 0px;
+  padding: 0px;
+}
+.dogDetail_h3 {
+  text-transform: capitalize;
+  padding-left: 8px;
+}
+
+.dogDetail_about {
+  margin-top: 30px;
+}
+
+/* Dog Adoption Modals */
+
+.dogAdoption_modal {
+  display: flex;
+  justify-content: space-around;
+}
