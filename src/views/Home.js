@@ -1,14 +1,16 @@
 import React, { useEffect, useState } from "react";
 import {
-  Layout,
-  Breadcrumb,
-  Card,
-  Col,
-  Row,
-  Divider,
-  Pagination,
-  Select,
-  Button,
+    Layout,
+    Breadcrumb,
+    Card,
+    Col,
+    Row,
+    Divider,
+    Pagination,
+    Select,
+    Button,
+    Typography
+
 } from "antd";
 import { HeartOutlined } from "@ant-design/icons";
 import { bindActionCreators } from "redux";
@@ -17,13 +19,14 @@ import FullPageLoader from "../components/loader";
 import { Breeds } from "../json/dogBreeds";
 import { Link } from "react-router-dom";
 
+
 //services
 import { getDog } from "../services/dog.services";
 import { addToFavourites } from "../services/user.services";
 
 const { Content } = Layout;
 const { Option } = Select;
-
+const { Title } = Typography;
 // const Dogs = [
 //   {
 //     key: 0,
@@ -76,165 +79,198 @@ const { Option } = Select;
 // ];
 
 const DogCards = ({ Dogs }) => {
-  const addToFavouritesHelper = async (petId) => {
-    return new Promise((resolve, reject) => {
-      return addToFavourites(petId, resolve, reject);
-    });
-  };
+        const addToFavouritesHelper = async(petId) => {
+            return new Promise((resolve, reject) => {
+                return addToFavourites(petId, resolve, reject);
+            });
+        };
 
-  const addToFavouritesService = async (petId) => {
-    try {
-      return await addToFavouritesHelper(petId);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+        const addToFavouritesService = async(petId) => {
+            try {
+                return await addToFavouritesHelper(petId);
+            } catch (error) {
+                console.log(error);
+            }
+        };
 
-  return Dogs.map((dog, i) => (
-    <Col span={8} key={i}>
-      <Link to={`/pets/${dog._id}`}>
-        <Card
-          hoverable
-          style={{ width: 300 }}
-          cover={<img alt={dog.name} src={dog.image} style={{ height: 250 }} />}
-          style={{ marginTop: 10 }}
-        >
-          <h3>{dog.name.toUpperCase()}</h3>
+        return Dogs.map((dog, i) => ( <
+                Col span = { 8 }
+                xs = { 24 }
+                sm = { 12 }
+                md = { 8 }
+                xl = { 6 }
+                key = { i } >
+                <
+                Link to = { `/pets/${dog._id}` } >
+                <
+                Card hoverable
 
-          <h3>{dog.breed.toUpperCase()}</h3>
-          <Divider />
-          <div className="dog_card_footer">
-            <HeartOutlined
-              onClick={(e) => {
-                e.preventDefault();
-                e.stopPropagation();
-                addToFavouritesService({ petId: dog._id });
-              }}
-              className="fvt_icon"
-            />
-            {dog.price}
-          </div>
-        </Card>
-      </Link>
-    </Col>
-  ));
-};
+                cover = { < img alt = { dog.name }
+                    src = { dog.image }
+                    style = {
+                        { height: 250 } }
+                    />}
 
-const Home = ({ getDog, dogCount }) => {
-  const [dataSource, setDataSource] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [breedFilter, setBreedFilter] = useState(null);
+                    >
+                    <
+                    h3 > { dog.name.toUpperCase() } < /h3>
 
-  const getDogServiceHelper = (page, breedFilter) => {
-    return new Promise((resolve, reject) => {
-      return getDog(page, breedFilter, resolve, reject);
-    });
-  };
+                    <
+                    h3 > { dog.breed.toUpperCase() } < /h3> <
+                    Divider / >
+                    <
+                    div className = "dog_card_footer" >
+                    <
+                    HeartOutlined
+                    onClick = {
+                        (e) => {
+                            e.preventDefault();
+                            e.stopPropagation();
+                            addToFavouritesService({ petId: dog._id });
+                        }
+                    }
+                    className = "fvt_icon" /
+                    > { dog.price } <
+                    /div> <
+                    /Card> <
+                    /Link> <
+                    /Col>
+                ));
+        };
 
-  const getDogService = async (page, breedFilter) => {
-    try {
-      return await getDogServiceHelper(page, breedFilter);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+        const Home = ({ getDog, dogCount }) => {
+            const [dataSource, setDataSource] = useState([]);
+            const [isLoading, setIsLoading] = useState(false);
+            const [currentPage, setCurrentPage] = useState(1);
+            const [breedFilter, setBreedFilter] = useState(null);
 
-  useEffect(async () => {
-    setIsLoading(true);
-    let data = await getDogService();
-    setDataSource(data);
-    setIsLoading(false);
-  }, []);
+            const getDogServiceHelper = (page, breedFilter) => {
+                return new Promise((resolve, reject) => {
+                    return getDog(page, breedFilter, resolve, reject);
+                });
+            };
 
-  const PaginationHandler = async (page, pageSize) => {
-    setIsLoading(true);
-    try {
-      let data = await getDogService(page, breedFilter);
-      setCurrentPage(page);
-      setDataSource(data);
-    } catch (error) {
-      console.log(error);
-    }
-    setIsLoading(false);
-  };
+            const getDogService = async(page, breedFilter) => {
+                try {
+                    return await getDogServiceHelper(page, breedFilter);
+                } catch (error) {
+                    console.log(error);
+                }
+            };
 
-  const BreedFilterHandler = async (breed) => {
-    setIsLoading(true);
-    try {
-      let data = await getDogService(1, breed);
-      setBreedFilter(breed);
-      setCurrentPage(1);
-      setDataSource(data);
-    } catch (error) {
-      console.log(error);
-    }
-    setIsLoading(false);
-  };
+            useEffect(() => {
+                async function loadData() {
+                    setIsLoading(true);
+                    let data = await getDogService();
+                    setDataSource(data);
+                    setIsLoading(false);
+                }
+                loadData();
+                // eslint-disable-next-line react-hooks/exhaustive-deps
+            }, []);
 
-  if (isLoading) return <FullPageLoader />;
+            const PaginationHandler = async(page, pageSize) => {
+                setIsLoading(true);
+                try {
+                    let data = await getDogService(page, breedFilter);
+                    setCurrentPage(page);
+                    setDataSource(data);
+                } catch (error) {
+                    console.log(error);
+                }
+                setIsLoading(false);
+            };
 
-  return (
-    <Layout style={{ padding: "0 24px 24px" }}>
-      <div className="breadcrumb_wrapper">
-        <Breadcrumb style={{ marginTop: "16px" }}>
-          <Breadcrumb.Item>Home</Breadcrumb.Item>
-          <Breadcrumb.Item>Dogs</Breadcrumb.Item>
-        </Breadcrumb>
-        <Select
-          showSearch
-          name="breed"
-          placeholder="Select the Breed Filter"
-          onChange={BreedFilterHandler}
-          value={breedFilter}
-          className="breed_filter"
-          allowClear
-        >
-          {Breeds.map((breed, index) => {
-            return (
-              <Option value={breed} key={index}>
-                {breed}
-              </Option>
+            const BreedFilterHandler = async(breed) => {
+                setIsLoading(true);
+                try {
+                    let data = await getDogService(1, breed);
+                    setBreedFilter(breed);
+                    setCurrentPage(1);
+                    setDataSource(data);
+                } catch (error) {
+                    console.log(error);
+                }
+                setIsLoading(false);
+            };
+
+            if (isLoading) return <FullPageLoader / > ;
+
+            return ( <
+                Layout style = {
+                    { padding: "0 24px 24px" } } >
+                <
+                div className = "breadcrumb_wrapper" >
+
+                <
+                Breadcrumb style = {
+                    { marginTop: "16px" } } >
+                <
+                Breadcrumb.Item > Home < /Breadcrumb.Item> <
+                Breadcrumb.Item > Dogs < /Breadcrumb.Item> <
+                /Breadcrumb> <
+                Select showSearch name = "breed"
+                placeholder = "Select the Breed Filter"
+                onChange = { BreedFilterHandler }
+                value = { breedFilter }
+                className = "breed_filter"
+                allowClear >
+
+                {
+                    Breeds.map((breed, index) => {
+                        return ( <
+                            Option value = { breed }
+                            key = { index } > { breed } <
+                            /Option>
+                        );
+                    })
+                } <
+                /Select> <
+                /div> <
+                center >
+                <
+                Title > Find a Dog < /Title> <
+                /center> <
+                Content className = "site-layout-background"
+                style = {
+                    {
+                        margin: 0,
+                        minHeight: 280,
+                    }
+                } >
+                {
+                    dataSource.length === 0 ? ( <
+                        h3 > No Pets available < /h3>
+                    ) : ( <
+                        div className = "site-card-wrapper" >
+                        <
+                        Row gutter = { 16 } >
+                        <
+                        DogCards Dogs = { dataSource }
+                        /> <
+                        /Row> <
+                        Pagination current = { currentPage }
+                        onChange = { PaginationHandler }
+                        total = { dogCount }
+                        className = "home_pagination"
+                        pageSize = { 2 }
+                        /> <
+                        /div>
+                    )
+                } <
+                /Content> <
+                /Layout>
             );
-          })}
-        </Select>
-      </div>
-      <Content
-        className="site-layout-background"
-        style={{
-          margin: 0,
-          minHeight: 280,
-        }}
-      >
-        {dataSource.length === 0 ? (
-          <h3>No Pets available</h3>
-        ) : (
-          <div className="site-card-wrapper">
-            <Row gutter={16}>
-              <DogCards Dogs={dataSource} />
-            </Row>
-            <Pagination
-              current={currentPage}
-              onChange={PaginationHandler}
-              total={dogCount}
-              className="home_pagination"
-              pageSize={2}
-            />
-          </div>
-        )}
-      </Content>
-    </Layout>
-  );
-};
+        };
 
-const mapStateToProps = (state) => {
-  return {
-    dogData: state.dog.dogData,
-    dogCount: state.dog.dogCount,
-  };
-};
+        const mapStateToProps = (state) => {
+            return {
+                dogData: state.dog.dogData,
+                dogCount: state.dog.dogCount,
+            };
+        };
 
-const mapDispatchToProps = (dispatch) =>
-  bindActionCreators({ getDog }, dispatch);
+        const mapDispatchToProps = (dispatch) =>
+            bindActionCreators({ getDog }, dispatch);
 
-export default connect(mapStateToProps, mapDispatchToProps)(Home);
+        export default connect(mapStateToProps, mapDispatchToProps)(Home);
