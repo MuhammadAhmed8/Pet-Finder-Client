@@ -6,12 +6,13 @@ import "./Message.css";
 
 export const Message = ({ message, name }) => {
   let isSentByCurrentUser = false;
-
+  const user = JSON.parse(localStorage.getItem("user"))
+  console.log("heull", user)
   const trimmedName = name.trim().toLowerCase();
-
-  // if(user === trimmedName) {
-  //     isSentByCurrentUser = true
-  // }
+  
+  if(user.name === trimmedName) {
+      isSentByCurrentUser = true
+  }
 
   return isSentByCurrentUser ? (
     <div className="messageContainer justifyEnd">
@@ -25,7 +26,7 @@ export const Message = ({ message, name }) => {
       <div className="messageBox backgroundLight">
         <p className="messageText colorDark">{message}</p>
       </div>
-      <p className="sentText pl-10">{name}</p>
+      <p className="sentText pl-10">{trimmedName}</p>
     </div>
   );
 };

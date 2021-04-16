@@ -46,7 +46,10 @@ const Message = ({ match }) => {
   const sendMessage = async (event) => {
     event.preventDefault();
     try {
-      return await sendMessageHelper();
+      let m = await sendMessageHelper();
+      let conv = await getMessages();
+      setMessages(conv);
+      return m;
     } catch (error) {
       console.log(error);
     }

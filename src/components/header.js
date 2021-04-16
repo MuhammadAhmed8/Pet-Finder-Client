@@ -48,7 +48,7 @@ export const HeaderComponent = () => {
             <Link to="/user/favourite">Favourites</Link>
           </Menu.Item>
           <Menu.Item key="6">
-            <Link to="/dashboard">Logout</Link>
+            <Link>Logout</Link>
           </Menu.Item>
         </Menu>
       </Header>
@@ -74,7 +74,7 @@ export const HeaderComponent = () => {
           <Link to="/user/conversations">Messages</Link>
         </Menu.Item>
         <Menu.Item key="4">
-          <Link to="/dashboard">Logout</Link>
+          <Link>Logout</Link>
         </Menu.Item>
       </Menu>
     </Header>

@@ -13,31 +13,29 @@ import { getFavourites } from "../services/user.services";
 const { Content } = Layout;
 
 const Cards = ({ favourites }) => {
-        return favourites.map((dog, i) => ( <
-                Col span = { 8 }
-                key = { i } > { /* <Link to={`/pets/${dog._id}`}> */ } <
-                Card hoverable style = {
-                    { width: 300 } }
+        return favourites.map((dog, i) => (
+                <Col span = { 8 } xs = { 24 }
+                sm = { 12 }
+                md = { 8 }
+                xl = { 6 }
+                key = { i }> 
+                <Card hoverable style = {
+                    { maxWidth: '300px' } }
                 cover = { < img alt = { dog.name }
                     src = { dog.image }
                     style = {
-                        { height: 250 } }
-                    />}
+                        { height: 250 }
+                     }
+                    />
+                        }>
+                    <h3 > { dog.name.toUpperCase() } </h3>
 
-                    >
-                    <
-                    h3 > { dog.name.toUpperCase() } < /h3>
-
-                    <
-                    h3 > { dog.breed.toUpperCase() } < /h3> <
-                    Divider / >
-                    <
-                    div className = "dog_card_footer" >
-                    <
-                    HeartOutlined / > { dog.price } <
-                    /div> <
-                    /Card> { /* </Link> */ } <
-                    /Col>
+                    <h3 > { dog.breed.toUpperCase() } </h3>
+                    <Divider/>
+                    <div className = "dog_card_footer" >
+                    <HeartOutlined/> { dog.price }
+                    </div> </Card> { /* </Link> */ }
+                    </Col>
                 ));
         };
 
@@ -68,53 +66,44 @@ const Cards = ({ favourites }) => {
             if (isLoading) return <FullPageLoader / > ;
 
             if (favourites.length === 0)
-                return ( <
-                    Layout style = {
+                return ( <Layout style = {
                         { padding: "0 24px 24px" } } >
-                    <
-                    Content className = "site-layout-background"
+                    <Content className = "site-layout-background"
                     style = {
                         {
                             marginTop: 20,
                             minHeight: 280,
                         }
                     } >
-                    <
-                    h1 > You have no Favourites < /h1> <
-                    /Content> <
-                    /Layout>
+                    <h1 > You have no Favourites </h1>
+                    </Content>
+                    </Layout>
                 );
 
-            return ( <
-                Layout style = {
+            return (
+                <Layout style = {
                     { padding: "0 24px 24px" } } >
-                <
-                Content className = "site-layout-background"
+                <Content className = "site-layout-background"
                 style = {
                     {
                         marginTop: 20,
                         minHeight: 280,
                     }
-                } >
-                <
-                PageHeader className = "site-page-header"
+                }>
+                <PageHeader className = "site-page-header"
                 title = "My Favourites"
                 subTitle = { favourites.length }
+                /> <Row gutter = { 15 }>
 
-                /> <
-                Row gutter = { 15 } >
-
-                <
-                Cards span = { 8 }
+                <Cards span = { 8 }
                 xs = { 24 }
                 sm = { 12 }
                 md = { 8 }
                 xl = { 6 }
-                favourites = { favourites }
-                /> <
-                /Row> <
-                /Content> <
-                /Layout>
+                favourites = { favourites }/>
+                </Row>
+                </Content>
+                </Layout>
             );
         };
 

@@ -1,5 +1,5 @@
 @import "antd/dist/antd.css";
-
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&display=swap');
 #root {
   height: 100%;
 }
@@ -176,6 +176,8 @@
 }
 
 .dogDetail_about {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
   margin-top: 30px;
 }
 
@@ -203,4 +205,53 @@
 .ant-btn-primary{
   background: #6504b5;
   border: #6504b5
+}
+
+.ant-card{
+  margin-bottom: 20px;
+  box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.1);
+}
+
+.ant-card-body{
+  padding: 0px 20px 15px;
+}
+
+.detail_section{
+  display: flex;
+ 
+}
+
+h1{
+  font-family: 'poppins' !important;
+  
+}
+
+.detail_section h1{
+  font-size:2.2rem;
+  margin: 40px 0 20px 0px;
+  padding: 5px 10px;
+  background:#fff;
+  border-left:5px solid #6504b5
+
+}
+
+.ant-layout{
+  background:#efeef1
+}
+
+.detail_content .ant-card-body{
+  padding-bottom: 0;
+}
+
+@media screen and (max-width:768px){
+  .detail_section{
+    flex-direction: column;
+  }
+}
+
+.ant-menu-item:hover, .ant-menu-item-active, .ant-menu:not(.ant-menu-inline) .ant-menu-submenu-open, .ant-menu-submenu-active, .ant-menu-submenu-title:hover{
+  color:white
+}
+.ant-menu-horizontal > .ant-menu-item a:hover{
+  color:white
 }

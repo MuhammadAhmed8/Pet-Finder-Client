@@ -52,9 +52,9 @@ export const addDog = (data, resolve, reject) => {
     };
 };
 
-export const getDog = (page = 1, breedname = null, resolve, reject) => {
-    let params = { page, limit:10};
-    if (breedname !== null) params.breed = breedname;
+export const getDog = (page = 1, queryParams = null, resolve, reject) => {
+    let params = { page, limit:10, ...queryParams};
+    
 
     return (dispatch) => {
         return getRequest("v1/pets", params, false)

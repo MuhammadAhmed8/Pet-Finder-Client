@@ -9,6 +9,7 @@ import "./Messages.css";
 export const Messages = ({ messages }) => {
   return (
     <ScrollToBottom className="messages">
+      {console.log("hi", messages)}
       {messages.map((message, i) => {
         console.log(message);
         return (

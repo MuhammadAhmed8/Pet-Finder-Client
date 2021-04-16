@@ -9,7 +9,6 @@ import {
   Card,
   Input,
   Modal,
-  Typography,
   message as ErrorMessage,
 } from "antd";
 import FullPageLoader from "../components/loader";
@@ -17,11 +16,8 @@ import FullPageLoader from "../components/loader";
 import { makeAdoption } from "../services/user.services";
 import { CreateConvSendMsg } from "../services/user.services";
 
-
-const { Title } = Typography;
 const { Content } = Layout;
 const { TextArea } = Input;
-
 
 const DogDetail = ({ dogData, dogCount, match }) => {
   const [dogDetail, setDogDetail] = useState({});
@@ -105,29 +101,54 @@ const DogDetail = ({ dogData, dogCount, match }) => {
           minHeight: 280,
         }}
       >
-        <Row justify="space-between">
-          <Col span={10}>
-            <Card
-              cover={<img src={dogDetail.image} alt={dogDetail.name} />}
-              style={{ marginTop: 30 }}
-            >
+
+        <div className="detail_section">
+          <div className="detail_image">
+            <img src={dogDetail.image} style={{ maxWidth:'600px', margin:'40px'}}/>
+            <div>
+              <h2 style={{margin:'auto', borderRadius:'5px',color: "white", textAlign:'center', fontFamily:'poppins', background:'#6504b5', width:'80%'}}>
+                Are you interested to adopt this pet ?
+              </h2>
+              <br></br>
+              <div style={{ textAlign:'center'}}>
+              <Button style={{ marginRight: 10 }} onClick={showModal}>
+                Send message to Owner
+              </Button>
+              <Button onClick={AdoptionRequestHandler}>
+                Sent an adoption request
+              </Button>
+              </div>
+            </div>
+          </div>
+
+          <div className="detail_content">
+            <h1>{dogDetail.name}</h1>
+
+            <div>
+              <Card  style={{ width: '100%', padding: '30px 0'}}>
+                <div style={{display:"flex", justifyContent:'flex-start'}}>
+                <div style={{width:'50%', marginLeft:'20px'}}>
+                <p><b>Breed: </b>{dogDetail.breed}</p>
+                <p><b>Color: </b>{dogDetail.color}</p>
+                <p><b>location: </b>{dogDetail.location}</p>
+                <p style={{marginBottom:'0px'}}><b>Weight: </b>{dogDetail.weight}</p>
+                </div>
+                <div style={{width:'50%'}}>
+                <p><b>Size: </b>{dogDetail.size}</p>
+                <p><b>Age: </b>{dogDetail.age}</p>
+                <p style={{marginBottom:'0px'}}><b>Gender: </b>{dogDetail.gender}</p>
+                </div>
+                </div>
               
-            </Card>
-          </Col>
-          <Col span={13}>
-            <Title>{dogDetail.name.toUpperCase()}</Title>
+              </Card>
+            </div>
+
             <h3 className="dogDetail_about">{dogDetail.about}</h3>
-            <h2 style={{ color: "red" }}>
-              Are you interested to adopt this pet ?
-            </h2>
-            <Button style={{ marginRight: 10 }} onClick={showModal}>
-              Send message to Owner
-            </Button>
-            <Button onClick={AdoptionRequestHandler}>
-              Sent an adoption request
-            </Button>
-          </Col>
-        </Row>
+            
+          </div>
+
+        </div>
+
         <Modal
           title="Send a message to owner"
           visible={isModalVisible}

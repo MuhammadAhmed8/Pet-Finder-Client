@@ -27,56 +27,6 @@ import { addToFavourites } from "../services/user.services";
 const { Content,Footer } = Layout;
 const { Option } = Select;
 const { Title } = Typography;
-// const Dogs = [
-//   {
-//     key: 0,
-//     name: "Bella",
-//     price: "$15",
-//     breed: "German Shepherd",
-//     owner: "Ahmed",
-//     img: "images/mydog.jpg",
-//   },
-//   {
-//     key: 1,
-//     name: "Luna",
-//     price: "$15",
-//     breed: "Bulldog ",
-//     owner: "Ahmed",
-//     img: "images/mydog.jpg",
-//   },
-//   {
-//     key: 2,
-//     name: "Bailey",
-//     price: "$15",
-//     breed: "ABC",
-//     owner: "Ahmed",
-//     img: "images/mydog.jpg",
-//   },
-//   {
-//     key: 3,
-//     name: "Daisy",
-//     price: "$15",
-//     breed: "ABC",
-//     owner: "Ahmed",
-//     img: "images/mydog.jpg",
-//   },
-//   {
-//     key: 4,
-//     name: "ABC",
-//     price: "$15",
-//     breed: "ABC",
-//     owner: "Ahmed",
-//     img: "images/mydog.jpg",
-//   },
-//   {
-//     key: 5,
-//     name: "ABC",
-//     price: "$15",
-//     breed: "ABC",
-//     owner: "Ahmed",
-//     img: "images/mydog.jpg",
-//   },
-// ];
 
 const DogCards = ({ Dogs }) => {
         const addToFavouritesHelper = async(petId) => {
@@ -105,11 +55,11 @@ const DogCards = ({ Dogs }) => {
                     cover = { < img alt = { dog.name }
                     src = { dog.image }
                     style = {
-                        { height: 250 } }
+                        { height: 250, marginBottom:'20px' } }
                     />}
 
                 >
-                <Title style={{fontSize:'1.2rem', textAlign:'center'}}> { dog.name.toUpperCase() } </Title>
+                <Title style={{fontSize:'1.5rem', textAlign:'center'}}> { dog.name.toUpperCase() } </Title>
 
                     <Divider/>
                     <div className = "dog_card_footer" >
@@ -135,16 +85,18 @@ const DogCards = ({ Dogs }) => {
             const [isLoading, setIsLoading] = useState(false);
             const [currentPage, setCurrentPage] = useState(1);
             const [breedFilter, setBreedFilter] = useState(null);
+            const [sizeFilter, setSizeFilter] = useState(null);
+            const [colorFilter, setGenderFilter] = useState(null);
 
-            const getDogServiceHelper = (page, breedFilter) => {
+            const getDogServiceHelper = (page, filter) => {
                 return new Promise((resolve, reject) => {
-                    return getDog(page, breedFilter, resolve, reject);
+                    return getDog(page, filter, resolve, reject);
                 });
             };
 
-            const getDogService = async(page, breedFilter) => {
+            const getDogService = async(page, filter) => {
                 try {
-                    return await getDogServiceHelper(page, breedFilter);
+                    return await getDogServiceHelper(page, filter);
                 } catch (error) {
                     console.log(error);
                 }
@@ -176,8 +128,33 @@ const DogCards = ({ Dogs }) => {
             const BreedFilterHandler = async(breed) => {
                 setIsLoading(true);
                 try {
-                    let data = await getDogService(1, breed);
+                    let data = await getDogService(1, {breed});
                     setBreedFilter(breed);
+                    setCurrentPage(1);
+                    setDataSource(data);
+                } catch (error) {
+                    console.log(error);
+                }
+                setIsLoading(false);
+            };
+
+            const colorFilterHandler = async(color) => {
+                setIsLoading(true);
+                try {
+                    let data = await getDogService(1, {color});
+                    setGenderFilter(color);
+                    setCurrentPage(1);
+                    setDataSource(data);
+                } catch (error) {
+                    console.log(error);
+                }
+                setIsLoading(false);
+            };
+            const sizeFilterHandler = async(size) => {
+                setIsLoading(true);
+                try {
+                    let data = await getDogService(1, {size});
+                    setSizeFilter(size);
                     setCurrentPage(1);
                     setDataSource(data);
                 } catch (error) {
@@ -200,7 +177,7 @@ const DogCards = ({ Dogs }) => {
                 </Breadcrumb>
                 <div>
                 <Select showSearch name = "breed"
-                placeholder = "Select the Breed Filter"
+                placeholder = "Breed"
                 onChange = { BreedFilterHandler }
                 value = { breedFilter }
                 className = "breed_filter"
@@ -216,26 +193,34 @@ const DogCards = ({ Dogs }) => {
                     })
                 }
                 </Select>
-                <Select showSearch name = "breed"
-                placeholder = "Gender"
-                onChange = { BreedFilterHandler }
-                value = { breedFilter }
+                <Select showSearch name = "color"
+                placeholder = "Color"
+                onChange = { colorFilterHandler }
+                value = { colorFilter }
                 className = "breed_filter"
                 allowClear>
-                    <Option value = 'male'> male
+                    <Option value = 'white'> White
                     </Option>
-                    <Option value = 'female'> Female
+                    <Option value = 'brown'> Brown
+                    </Option>
+                    <Option value = 'black'> Black
+                    </Option>
+                    <Option value = 'merle'> Merle
+                    </Option>
+                    <Option value = 'sable'> Sable
+                    </Option>
+                    <Option value = 'gray'> Gray / Silver
                     </Option>
                 </Select>
-                <Select showSearch name = "breed"
+                <Select showSearch name = "size"
                 placeholder = "Size"
-                onChange = { BreedFilterHandler }
-                value = { breedFilter }
+                onChange = { sizeFilterHandler }
+                value = { sizeFilter }
                 className = "breed_filter"
                 allowClear>
                     <Option value = 'small'> Small
                     </Option>
-                    <Option value = 'medium'> medium
+                    <Option value = 'medium'> Medium
                     </Option>
                     <Option value = 'large'> Large
                     </Option>
@@ -246,8 +231,9 @@ const DogCards = ({ Dogs }) => {
                 </div>
                 <center>
                     <div style={{display:'flex', alignItems:'center', justifyContent:'center', margin: '30px 0', flexWrap:'wrap'}}>
-                <img src="https://i.dlpng.com/static/png/6880994_preview.png" width="80px" ></img>
-                <Title style={{fontSize:'3.2rem', margin:'0px 20px'}}> Find a Dog </Title>
+                <img src="https://www.pngrepo.com/png/36511/512/dog.png" width="100px" ></img>
+                <Title style={{fontSize:'3.2rem', margin:'0px 20px', fontFamily:'poppins', textTransform:'uppercase'}}> 
+                Find a Dog </Title>
                 </div>
                 </center> 
                 <Content className = "site-layout-background"
