@@ -24,7 +24,7 @@ import { Link } from "react-router-dom";
 import { getDog } from "../services/dog.services";
 import { addToFavourites } from "../services/user.services";
 
-const { Content } = Layout;
+const { Content,Footer } = Layout;
 const { Option } = Select;
 const { Title } = Typography;
 // const Dogs = [
@@ -93,35 +93,27 @@ const DogCards = ({ Dogs }) => {
             }
         };
 
-        return Dogs.map((dog, i) => ( <
-                Col span = { 8 }
+        return Dogs.map((dog, i) => ( 
+                <Col span = { 8 }
                 xs = { 24 }
                 sm = { 12 }
                 md = { 8 }
                 xl = { 6 }
                 key = { i } >
-                <
-                Link to = { `/pets/${dog._id}` } >
-                <
-                Card hoverable
-
-                cover = { < img alt = { dog.name }
+                <Link to = { `/pets/${dog._id}` } >
+                <Card hoverable
+                    cover = { < img alt = { dog.name }
                     src = { dog.image }
                     style = {
                         { height: 250 } }
                     />}
 
-                    >
-                    <
-                    h3 > { dog.name.toUpperCase() } < /h3>
+                >
+                <Title style={{fontSize:'1.2rem', textAlign:'center'}}> { dog.name.toUpperCase() } </Title>
 
-                    <
-                    h3 > { dog.breed.toUpperCase() } < /h3> <
-                    Divider / >
-                    <
-                    div className = "dog_card_footer" >
-                    <
-                    HeartOutlined
+                    <Divider/>
+                    <div className = "dog_card_footer" >
+                    <HeartOutlined
                     onClick = {
                         (e) => {
                             e.preventDefault();
@@ -129,12 +121,12 @@ const DogCards = ({ Dogs }) => {
                             addToFavouritesService({ petId: dog._id });
                         }
                     }
-                    className = "fvt_icon" /
-                    > { dog.price } <
-                    /div> <
-                    /Card> <
-                    /Link> <
-                    /Col>
+                    className = "fvt_icon"/>
+                    <h4 style={{fontWeight:"bold"}}>{dog.breed.toUpperCase()}</h4>
+                    </div> 
+                    </Card>
+                    </Link>
+                    </Col>
                 ));
         };
 
@@ -196,70 +188,96 @@ const DogCards = ({ Dogs }) => {
 
             if (isLoading) return <FullPageLoader / > ;
 
-            return ( <
-                Layout style = {
+            return ( 
+                <Layout style = {
                     { padding: "0 24px 24px" } } >
-                <
-                div className = "breadcrumb_wrapper" >
+                <div className = "breadcrumb_wrapper" >
 
-                <
-                Breadcrumb style = {
+                <Breadcrumb style = {
                     { marginTop: "16px" } } >
-                <
-                Breadcrumb.Item > Home < /Breadcrumb.Item> <
-                Breadcrumb.Item > Dogs < /Breadcrumb.Item> <
-                /Breadcrumb> <
-                Select showSearch name = "breed"
+                <Breadcrumb.Item > Home </Breadcrumb.Item>
+                <Breadcrumb.Item > Dogs </Breadcrumb.Item>
+                </Breadcrumb>
+                <div>
+                <Select showSearch name = "breed"
                 placeholder = "Select the Breed Filter"
                 onChange = { BreedFilterHandler }
                 value = { breedFilter }
                 className = "breed_filter"
-                allowClear >
+                allowClear>
 
                 {
                     Breeds.map((breed, index) => {
-                        return ( <
-                            Option value = { breed }
-                            key = { index } > { breed } <
-                            /Option>
+                        return (
+                            <Option value = { breed }
+                            key = { index } > { breed }
+                            </Option>
                         );
                     })
-                } <
-                /Select> <
-                /div> <
-                center >
-                <
-                Title > Find a Dog < /Title> <
-                /center> <
-                Content className = "site-layout-background"
-                style = {
-                    {
-                        margin: 0,
-                        minHeight: 280,
-                    }
-                } >
+                }
+                </Select>
+                <Select showSearch name = "breed"
+                placeholder = "Gender"
+                onChange = { BreedFilterHandler }
+                value = { breedFilter }
+                className = "breed_filter"
+                allowClear>
+                    <Option value = 'male'> male
+                    </Option>
+                    <Option value = 'female'> Female
+                    </Option>
+                </Select>
+                <Select showSearch name = "breed"
+                placeholder = "Size"
+                onChange = { BreedFilterHandler }
+                value = { breedFilter }
+                className = "breed_filter"
+                allowClear>
+                    <Option value = 'small'> Small
+                    </Option>
+                    <Option value = 'medium'> medium
+                    </Option>
+                    <Option value = 'large'> Large
+                    </Option>
+                    <Option value = 'giant'> Giant
+                    </Option>
+                </Select>
+                </div>
+                </div>
+                <center>
+                    <div style={{display:'flex', alignItems:'center', justifyContent:'center', margin: '30px 0', flexWrap:'wrap'}}>
+                <img src="https://i.dlpng.com/static/png/6880994_preview.png" width="80px" ></img>
+                <Title style={{fontSize:'3.2rem', margin:'0px 20px'}}> Find a Dog </Title>
+                </div>
+                </center> 
+                <Content className = "site-layout-background"
+                        style = {
+                            {
+                                margin: 0,
+                                minHeight: 280,
+                            }
+                        } 
+                >
                 {
-                    dataSource.length === 0 ? ( <
-                        h3 > No Pets available < /h3>
-                    ) : ( <
-                        div className = "site-card-wrapper" >
-                        <
-                        Row gutter = { 16 } >
-                        <
-                        DogCards Dogs = { dataSource }
-                        /> <
-                        /Row> <
-                        Pagination current = { currentPage }
+                    dataSource.length === 0 ? (
+                        <h3> No Pets available </h3>
+                    ) : (
+                        <div className = "site-card-wrapper" style={{margin:"0 auto"}} >
+                        <Row gutter = { 16 } >
+                        <DogCards Dogs = { dataSource }/>
+                        </Row>
+                        <Pagination current = { currentPage }
                         onChange = { PaginationHandler }
                         total = { dogCount }
                         className = "home_pagination"
                         pageSize = { 2 }
-                        /> <
-                        /div>
+                        />
+                        </div>
                     )
-                } <
-                /Content> <
-                /Layout>
+                } </Content>
+                     <Footer style={{ textAlign: 'center' }}>Canine Shelter ©2018 All rights reserved</Footer>
+
+                </Layout>
             );
         };
 

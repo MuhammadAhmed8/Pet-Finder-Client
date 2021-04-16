@@ -23,8 +23,8 @@ const Cards = ({ favourites }) => {
                     style = {
                         { height: 250 } }
                     />}
-                    style = {
-                        { marginTop: 10 } } >
+
+                    >
                     <
                     h3 > { dog.name.toUpperCase() } < /h3>
 

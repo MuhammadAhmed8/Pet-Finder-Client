@@ -86,6 +86,7 @@
   align-items: center;
 }
 
+
 .fvt_icon:hover {
   color: red;
   cursor: pointer;
@@ -183,4 +184,23 @@
 .dogAdoption_modal {
   display: flex;
   justify-content: space-around;
+}
+
+.ant-layout-header,
+.ant-menu{
+  background:#6504b5;
+  color:rgb(246, 250, 255)
+  }
+
+.ant-menu-horizontal > .ant-menu-item a{
+  color:rgb(246, 250, 255)
+}
+
+.ant-table-thead > tr > th{
+  font-weight: 600
+}
+
+.ant-btn-primary{
+  background: #6504b5;
+  border: #6504b5
 }

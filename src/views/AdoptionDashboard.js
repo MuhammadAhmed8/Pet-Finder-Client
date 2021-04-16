@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Table, Layout, Button, Modal } from "antd";
+import { Table, Layout, Button, Modal , Tag, Divider} from "antd";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import FullPageLoader from "../components/loader";
@@ -8,6 +8,7 @@ import {
   getAdoptionRequests,
   ChangeRequestStatus,
 } from "../services/user.services";
+import Title from "antd/lib/skeleton/Title";
 const { Content } = Layout;
 
 const AdoptionDashboard = ({ getAdoptionRequests }) => {
@@ -103,6 +104,17 @@ const AdoptionDashboard = ({ getAdoptionRequests }) => {
       filterMultiple: false,
       onFilter: (value, record) => record.status.indexOf(value) === 0,
       render: (record) => <p>{record.toUpperCase()}</p>,
+      render: record => {
+        let color = record == 'accepted' ? 'green' : 'red';
+              if (record == "pending"){
+                color = "purple"
+              }
+        return(
+              <Tag color={color} key={record}>
+                {record.toUpperCase()}
+              </Tag>
+        )
+        },
     },
     {
       title: "Dog Information",
@@ -174,6 +186,8 @@ const AdoptionDashboard = ({ getAdoptionRequests }) => {
           height: "100%",
         }}
       >
+ 
+
         <Table
           columns={columns}
           dataSource={adoptionRequest}
@@ -187,24 +201,26 @@ const AdoptionDashboard = ({ getAdoptionRequests }) => {
             onCancel={handleDogCancel}
             destroyOnClose={true}
           >
-            <div className="dogAdoption_modal">
-              <div className="dogAdoption_modal_left">
+            <div className="dogAdoption_modal" style={{display:'flex', 'flexDirection':'column', justifyContent:'center', alignContent:'center'}}>
+              <div style={{textAlign:'center'}}>
                 <img
                   src={selectedData.pet.image}
                   alt={selectedData.pet.name}
-                  width={100}
-                  height={100}
+                  width={300}
+                  height={200}
                 />
               </div>
-              <div className="dogAdoption_modal_right">
-                <h3>Name: {selectedData.pet.name}</h3>
-                <h3>Age: {selectedData.pet.age}</h3>
-                <h3>Breed: {selectedData.pet.breed}</h3>
-                <h3>Color: {selectedData.pet.color}</h3>
-                <h3>Weight: {selectedData.pet.weight}</h3>
-                <h3>Location: {selectedData.pet.location}</h3>
-                <h3>Gender: {selectedData.pet.gender}</h3>
-                <h3>Size: {selectedData.pet.size}</h3>
+              <Divider></Divider>
+              <div>
+                <h3><b>Pet ID:</b> {selectedData.pet._id}</h3>
+                <h3><b>Name: </b>{selectedData.pet.name}</h3>
+                <h3><b>Age:</b> {selectedData.pet.age}</h3>
+                <h3><b>Breed:</b> {selectedData.pet.breed}</h3>
+                <h3><b>Color:</b> {selectedData.pet.color}</h3>
+                <h3><b>Weight: </b>{selectedData.pet.weight}</h3>
+                <h3><b>Location:</b> {selectedData.pet.location}</h3>
+                <h3><b>Gender: </b>{selectedData.pet.gender}</h3>
+                <h3><b>Size: </b>{selectedData.pet.size}</h3>
               </div>
             </div>
           </Modal>

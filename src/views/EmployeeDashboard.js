@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Table, Popconfirm, Layout, Button, Pagination } from "antd";
+import { Table, Popconfirm, Layout, Button, Pagination, Typography } from "antd";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import { AddDogModal } from "../modals/addDog";
@@ -9,7 +9,8 @@ import FullPageLoader from "../components/loader";
 //services
 import { addDog, getDog, UpdateDog, deleteDog } from "../services/dog.services";
 
-const { Content } = Layout;
+const { Content, Sider } = Layout;
+const { Title } = Typography;
 
 export const EmployeeDashboard = ({
   addDog,
@@ -123,12 +124,6 @@ export const EmployeeDashboard = ({
     },
 
     {
-      title: "Weight",
-      dataIndex: "weight",
-      key: "weight",
-      width: "100px",
-    },
-    {
       title: "Age",
       dataIndex: "age",
       key: "age",
@@ -146,12 +141,7 @@ export const EmployeeDashboard = ({
       key: "size",
       width: "100px",
     },
-    {
-      title: "About",
-      dataIndex: "about",
-      key: "about",
-      width: "300px",
-    },
+    
     {
       title: "Location",
       dataIndex: "location",
@@ -164,7 +154,7 @@ export const EmployeeDashboard = ({
       key: "image",
       width: "150px",
       render: (_, record) => (
-        <img height={100} width={150} src={record.image} alt={record.name} />
+        <img height={60} width={80} src={record.image} alt={record.name} />
       ),
     },
     {
@@ -219,6 +209,9 @@ export const EmployeeDashboard = ({
           height: "100%",
         }}
       >
+        <div style={{padding:'17px 0px'}}>
+        <Title>Manage Pets</Title>
+        </div>
         <div className="dashboard_btn">
           <Button
             type="primary"

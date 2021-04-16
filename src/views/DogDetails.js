@@ -9,6 +9,7 @@ import {
   Card,
   Input,
   Modal,
+  Typography,
   message as ErrorMessage,
 } from "antd";
 import FullPageLoader from "../components/loader";
@@ -16,8 +17,11 @@ import FullPageLoader from "../components/loader";
 import { makeAdoption } from "../services/user.services";
 import { CreateConvSendMsg } from "../services/user.services";
 
+
+const { Title } = Typography;
 const { Content } = Layout;
 const { TextArea } = Input;
+
 
 const DogDetail = ({ dogData, dogCount, match }) => {
   const [dogDetail, setDogDetail] = useState({});
@@ -107,34 +111,11 @@ const DogDetail = ({ dogData, dogCount, match }) => {
               cover={<img src={dogDetail.image} alt={dogDetail.name} />}
               style={{ marginTop: 30 }}
             >
-              <h1 className="dogDetail_h1">{dogDetail.name?.toUpperCase()}</h1>
-              <h3 className="dogDetail_h3">
-                <b>Breed: </b>
-                {dogDetail.breed}
-              </h3>
-              <h3 className="dogDetail_h3">
-                <b>Color: </b>
-                {dogDetail.color}
-              </h3>
-              <h3 className="dogDetail_h3">
-                <b>Age: </b>
-                {dogDetail.age}
-              </h3>
-              <h3 className="dogDetail_h3">
-                <b>Gender: </b>
-                {dogDetail.gender}
-              </h3>
-              <h3 className="dogDetail_h3">
-                <b>Size: </b>
-                {dogDetail.size}
-              </h3>
-              <h3 className="dogDetail_h3">
-                <b>Location: </b>
-                {dogDetail.location}
-              </h3>
+              
             </Card>
           </Col>
           <Col span={13}>
+            <Title>{dogDetail.name.toUpperCase()}</Title>
             <h3 className="dogDetail_about">{dogDetail.about}</h3>
             <h2 style={{ color: "red" }}>
               Are you interested to adopt this pet ?
