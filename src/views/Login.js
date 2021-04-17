@@ -11,6 +11,8 @@ import { userLogin } from "../services/user.services";
 
 const LoginForm = ({ onSubmit }) => {
   return (
+    <div>
+    <h1 style={{textAlign:'center'}}>SIGN IN</h1>
     <Formik
       initialValues={{
         email: "",
@@ -30,6 +32,7 @@ const LoginForm = ({ onSubmit }) => {
         errors,
         /* and other goodies */
       }) => (
+        
         <form onSubmit={handleSubmit} className="auth_form">
           <Input
             type="email"
@@ -65,6 +68,7 @@ const LoginForm = ({ onSubmit }) => {
         </form>
       )}
     </Formik>
+    </div>
   );
 };
 

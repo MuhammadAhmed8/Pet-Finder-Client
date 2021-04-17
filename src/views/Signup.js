@@ -15,7 +15,10 @@ import { userSignup } from "../services/user.services";
 const { Option } = Select;
 
 const EmpSignupForm = ({ onSubmit, role }) => {
+  
   return (
+    <div>
+    <h1 style={{textAlign:'center'}}>SIGN UP</h1>
     <Formik
       initialValues={{
         name: "",
@@ -130,6 +133,7 @@ const EmpSignupForm = ({ onSubmit, role }) => {
         </form>
       )}
     </Formik>
+    </div>
   );
 };
 

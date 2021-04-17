@@ -49,6 +49,7 @@ const Message = ({ match }) => {
       let m = await sendMessageHelper();
       let conv = await getMessages();
       setMessages(conv);
+      setMessage('')
       return m;
     } catch (error) {
       console.log(error);
