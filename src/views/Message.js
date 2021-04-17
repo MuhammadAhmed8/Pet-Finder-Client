@@ -26,12 +26,23 @@ const Message = ({ match }) => {
     }
   };
 
-  useEffect(async () => {
+  useEffect(() => {
+    const realTimeMsg = setInterval(async () => {
+      let conv = await getMessages();
+      setMessages(conv);
+    }, 3000);
     setIsLoading(true);
-    let conv = await getMessages();
-    setMessages(conv);
+    let conv = getMessages();
+    conv.then((msgs) => {
+      setMessages(msgs);
+    });
     setIsLoading(false);
+    return () => clearInterval(realTimeMsg);
   }, []);
+
+  // useEffect(() => {
+  //   return () => clearInterval(realTimeMsg);
+  // }, []);
 
   const sendMessageHelper = () =>
     new Promise((resolve, reject) => {
@@ -49,7 +60,7 @@ const Message = ({ match }) => {
       let m = await sendMessageHelper();
       let conv = await getMessages();
       setMessages(conv);
-      setMessage('')
+      setMessage("");
       return m;
     } catch (error) {
       console.log(error);

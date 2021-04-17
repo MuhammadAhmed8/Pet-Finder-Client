@@ -216,6 +216,7 @@ export const resetPassword = (resetPasswordData, resolve, reject) => {
 };
 
 export const logout = () => {
+  console.log("logout");
   return (dispatch) => {
     localStorage.removeItem("user");
     localStorage.removeItem("token");

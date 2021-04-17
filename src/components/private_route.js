@@ -9,8 +9,6 @@ const PrivateRoute = ({ component: Component, ...rest }) => (
       if (localStorage.getItem("user")) {
         return <Component {...props} />;
       }
-
-      alert("Sorry you are not authenticated");
       return (
         <Redirect to={{ pathname: "/", state: { from: props.location } }} />
       );

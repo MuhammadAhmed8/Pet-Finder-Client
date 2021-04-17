@@ -1,21 +1,41 @@
 import React from "react";
 import { Layout, Menu } from "antd";
 import { Link } from "react-router-dom";
-import { UserDeleteOutlined } from "@ant-design/icons";
 
 const { Header } = Layout;
 
 export const HeaderComponent = () => {
-  let udt = JSON.parse(localStorage.getItem("user"))
-  console.log(udt)
+  let udt = JSON.parse(localStorage.getItem("user"));
+  console.log(udt);
 
-  if (!udt){
+  if (!udt) {
     return (
       <Header className="header">
-         <div style={{ float: 'left', marginRight:"30px", position: 'relative', bottom:'8px'}}>
-            <img src="https://img.icons8.com/pastel-glyph/2x/dog--v2.png" width="50"></img>
-            <h1 style={{ display: 'inline-block', position: 'relative', top:'8px', marginLeft:'10px'}}>Canine Shleter</h1>
-            </div>
+        <div
+          style={{
+            float: "left",
+            marginRight: "30px",
+            position: "relative",
+            bottom: "8px",
+          }}
+        >
+          <Link to="/">
+            <img
+              src="https://img.icons8.com/pastel-glyph/2x/dog--v2.png"
+              width="50"
+            ></img>
+            <h1
+              style={{
+                display: "inline-block",
+                position: "relative",
+                top: "8px",
+                marginLeft: "10px",
+              }}
+            >
+              Canine Shleter
+            </h1>
+          </Link>
+        </div>
         <Menu mode="horizontal" defaultSelectedKeys={["1"]}>
           <Menu.Item key="1">
             <Link to="/">Home</Link>
@@ -31,16 +51,36 @@ export const HeaderComponent = () => {
     );
   }
 
-  if (udt.role ==="user"){
+  if (udt.role === "user") {
     return (
       <Header className="header">
-         <div style={{ float: 'left', marginRight:"30px", position: 'relative', bottom:'8px'}}>
-            <img src="https://img.icons8.com/pastel-glyph/2x/dog--v2.png" width="50"></img>
-            <h1 style={{ display: 'inline-block', position: 'relative', top:'8px', marginLeft:'10px'}}>Canine Shleter</h1>
-            </div>
+        <div
+          style={{
+            float: "left",
+            marginRight: "30px",
+            position: "relative",
+            bottom: "8px",
+          }}
+        >
+          <Link to="/">
+            <img
+              src="https://img.icons8.com/pastel-glyph/2x/dog--v2.png"
+              width="50"
+            ></img>
+            <h1
+              style={{
+                display: "inline-block",
+                position: "relative",
+                top: "8px",
+                marginLeft: "10px",
+              }}
+            >
+              Canine Shleter
+            </h1>
+          </Link>
+        </div>
 
         <Menu mode="horizontal" defaultSelectedKeys={["1"]}>
-         
           <Menu.Item key="1">
             <Link to="/">Home</Link>
           </Menu.Item>
@@ -60,19 +100,40 @@ export const HeaderComponent = () => {
 
   return (
     <Header className="header">
-       <div style={{ float: 'left', marginRight:"30px", position: 'relative', bottom:'8px'}}>
-          <img src="https://img.icons8.com/pastel-glyph/2x/dog--v2.png" width="50"></img>
-          <h1 style={{ display: 'inline-block', position: 'relative', top:'8px', marginLeft:'10px'}}>Canine Shleter</h1>
-          </div>
+      <div
+        style={{
+          float: "left",
+          marginRight: "30px",
+          position: "relative",
+          bottom: "8px",
+        }}
+      >
+        <Link to="/">
+          <img
+            src="https://img.icons8.com/pastel-glyph/2x/dog--v2.png"
+            width="50"
+          ></img>
+          <h1
+            style={{
+              display: "inline-block",
+              position: "relative",
+              top: "8px",
+              marginLeft: "10px",
+            }}
+          >
+            Canine Shleter
+          </h1>
+        </Link>
+      </div>
 
       <Menu mode="horizontal" defaultSelectedKeys={["1"]}>
-      <Menu.Item key="1">
+        <Menu.Item key="1">
           <Link to="/dashboard">Manage Pets</Link>
         </Menu.Item>
         <Menu.Item key="2">
           <Link to="/dashboard/adoption/">Adoption Requests</Link>
         </Menu.Item>
-        
+
         <Menu.Item key="3">
           <Link to="/user/conversations">Messages</Link>
         </Menu.Item>
@@ -82,10 +143,9 @@ export const HeaderComponent = () => {
       </Menu>
     </Header>
   );
-   
-function logout(){
+
+  function logout() {
     localStorage.clear();
-    window.location.href = '/';
-}
-  
+    window.location.href = "/";
+  }
 };
